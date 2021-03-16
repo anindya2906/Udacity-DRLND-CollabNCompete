@@ -22,7 +22,7 @@ class Agent():
     """Interacts with and learns from the environment."""
 
     def __init__(self, state_size, action_size, num_agents, random_seed,
-                 device, lr_actor, lr_critic, weight_decay):
+                 device, lr_actor, lr_critic, weight_decay, actor_local=None, actor_target=None, actor_optimizer=None):
         """Initialize an Agent object.
 
         Params
@@ -41,12 +41,23 @@ class Agent():
         self.weight_decay = weight_decay
 
         # Actor Network (w/ Target Network)
-        self.actor_local = Actor(
-            state_size, action_size, random_seed).to(self.device)
-        self.actor_target = Actor(
-            state_size, action_size, random_seed).to(self.device)
-        self.actor_optimizer = optim.Adam(
-            self.actor_local.parameters(), lr=self.lr_actor)
+        if actor_local == None:
+            self.actor_local = Actor(
+                state_size, action_size, random_seed).to(self.device)
+        else:
+            self.actor_local = actor_local
+
+        if actor_target == None:
+            self.actor_target = Actor(
+                state_size, action_size, random_seed).to(self.device)
+        else:
+            self.actor_target = actor_target
+
+        if actor_optimizer == None:
+            self.actor_optimizer = optim.Adam(
+                self.actor_local.parameters(), lr=self.lr_actor)
+        else:
+            self.actor_optimizer = actor_optimizer
 
         # Critic Network (w/ Target Network)
         self.critic_local = Critic(
@@ -108,7 +119,11 @@ class MADDPGAgent():
         self.update_every = update_every
         self.time_step = 0
 
-        self.agents = [Agent(state_size, action_size, num_agents, random_seed, device, lr_actor, lr_critic, weight_decay) for i in range(num_agents)]
+        self.actor_local = Actor(state_size, action_size, random_seed).to(self.device)
+        self.actor_target = Actor(state_size, action_size, random_seed).to(self.device)
+        self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=self.lr_actor)
+
+        self.agents = [Agent(state_size, action_size, num_agents, random_seed, device, lr_actor, lr_critic, weight_decay, self.actor_local, self.actor_target, self.actor_optimizer) for i in range(num_agents)]
 
         self.memory = ReplayBuffer(action_size, buffer_size, batch_size, random_seed, self.device)
 
