@@ -1,5 +1,5 @@
 ##### **Udacity Deep Reinforcement Learning Nanodegree**
-# Project 1: Navigation
+# Project 3: Collaboration And Competetion
 
 ![Navigation](navigation_screen.gif "Navigation")
 
