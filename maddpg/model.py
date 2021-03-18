@@ -17,8 +17,8 @@ class Actor(nn.Module):
         """Initialize parameters and build model.
         Params
         ======
-            state_size (int): Input dimension (Dimension of each state)
-            action_size (int): Output dimension (Dimension of each action)
+            state_size (int): Dimension of each state
+            action_size (int): Dimension of each action
             seed (int): Random seed
             fc1_units (int): Number of nodes in first hidden layer
             fc2_units (int): Number of nodes in second hidden layer
@@ -53,7 +53,7 @@ class Critic(nn.Module):
         """Initialize parameters and build model.
         Params
         ======
-            input_dim (int): Input dimension (Dimension of each state)
+            state_size (int): Dimension of each state
             action_size : Dimension of each action
             seed (int): Random seed
             fc1_units (int): Number of nodes in the first hidden layer
