@@ -98,12 +98,12 @@ Below is the plot of rewards during the training.
 * Episode 2000	Average Score: 0.18380000278353692
 * Episode 2100	Average Score: 0.28440000426024264
 * Episode 2200	Average Score: 0.42800000643357633
-* Environment solved in 2193 episodes with Average Score of 0.5020000075362623
+* Environment solved in 2293 episodes with Average Score of 0.5020000075362623
 
 ![Plot of reward](./images/reward_plot.png "Plot of Rewards")
 
 The agent was able to score an average of more than +0.5 over 100 episodes. 
-The agent was able to solve the environment in 2193 episodes with an average score of 0.5
+The agent was able to solve the environment in 2293 episodes with an average score of 0.5
 
 ## **Ideas for Future Work**
 Currently we are using vanilla DDPG Agent to solve the environment. In futur we have plans to implement several other algorithms like **Trust Region Policy Optimization (TRPO)**, **Truncated Natural Policy Gradient (TNPG)** and the **Distributed Distributional Deterministic Policy Gradients (D4PG)** to improve the performance of the agent.
